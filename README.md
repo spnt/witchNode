@@ -81,7 +81,7 @@ module.exports = function(app) {
 }
 ``````````
 
-这样的结构虽然每个单元都很好理解，但把TODO补完，页面将变的复杂无比，满眼都是一坨一坨的代码，就算是拆分了文件，这个路由页面仍然存在了很多的页面逻辑。为了避免这个非常不优雅的问题，我改写了下路由的运行方法(没有更改Express，还得做无障碍升级呢)。
+这样的结构虽然每个单元都很好理解，但把TODO补完，页面将变的复杂无比，满眼都是一坨一坨的代码，就算是拆分了文件，这个路由js仍然存在了很多的页面逻辑。为了避免这个非常不优雅的问题，我改写了下路由的运行方法(没有更改Express，还得做无障碍升级呢)。
 
 ````````js
 module.exports=function(app){
@@ -102,6 +102,17 @@ module.exports=function(app){
     });
 }
 ```````````
+app.all方法是接管所有页面请求（当然都是非静态的），然后把请求的目录组装成数组，然后通过
+
+``````js
+require('../controller/'+urlpath[0])[urlpath[1]](req, res);
+`````
+去执行代码
+比如：
+首页，'/' -----> ['index','index']  --->执行/controller/index.js 里的index方法
+登录，'/login'------>['reg','index']  ---->执行/controller/login.js 里的index方法
+登录按钮post地址,'/login/login' ----['login','login'] --->执行/controller/login.js 里的login方法
+这样就把所有本来该写在路由js的页面逻辑全部分担到了controller里的js文件里，各个页面的逻辑都不掺和，一下子感觉高雅了很多，而且两级目录(一文件名。一操作方法)在实际项目中已经基本够用了
 
 
 

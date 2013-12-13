@@ -34,5 +34,4 @@ module.exports=function(app){
             res.send('cuowu');
         }*/
     });
-
 }
