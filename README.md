@@ -16,6 +16,11 @@ Witch Node是一个以Express框架开发的用于快速开发建站的程序，
 > 引入xss过滤方法
 > 编写的基础工具提供：字符串截取，时间换算，数据类型校验等方法
 
+版本
+=======
+0.1.2
+
+
 项目相关
 ==========
 
@@ -112,9 +117,10 @@ require('../controller/'+urlpath[0])[urlpath[1]](req, res);
 首页，'/' -----> ['index','index']  --->执行/controller/index.js 里的index方法
 登录，'/login'------>['reg','index']  ---->执行/controller/login.js 里的index方法
 登录按钮post地址,'/login/login' ----['login','login'] --->执行/controller/login.js 里的login方法
-
-
 这样就把所有本来该写在路由js的页面逻辑全部分担到了controller里的js文件里，各个页面的逻辑都不掺和，一下子感觉高雅了很多，而且两级目录(一文件名。一操作方法)在实际项目中已经基本够用了
+
+页面访问权限判断也将会在此完成
+
 
 
 
