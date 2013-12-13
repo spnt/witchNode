@@ -102,7 +102,7 @@ module.exports=function(app){
     });
 }
 ```````````
-app.all方法是接管所有页面请求（当然都是非静态的），然后把请求的目录组装成数组，然后通过
+app.all方法是Express原生语法，作用是接管所有页面请求（当然都是非静态的），然后把请求的目录组装成数组，然后通过
 
 ``````js
 require('../controller/'+urlpath[0])[urlpath[1]](req, res);
@@ -112,6 +112,8 @@ require('../controller/'+urlpath[0])[urlpath[1]](req, res);
 首页，'/' -----> ['index','index']  --->执行/controller/index.js 里的index方法
 登录，'/login'------>['reg','index']  ---->执行/controller/login.js 里的index方法
 登录按钮post地址,'/login/login' ----['login','login'] --->执行/controller/login.js 里的login方法
+
+
 这样就把所有本来该写在路由js的页面逻辑全部分担到了controller里的js文件里，各个页面的逻辑都不掺和，一下子感觉高雅了很多，而且两级目录(一文件名。一操作方法)在实际项目中已经基本够用了
 
 
