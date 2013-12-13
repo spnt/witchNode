@@ -1,6 +1,6 @@
 
 var home = {}
-    redisCache=require('../dataapi/redisApi.js'),
+    redisCache=require('../modules/redisApi.js'),
     tools=require('../modules/tools.js');
 
 home.index = function(req, res){//默认35M的内存

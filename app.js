@@ -36,7 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 
-app.use(express.static(path.join(__dirname, 'public',{maxAge:config.staticMaxAge})));//设置静态文件夹和静态缓存
+app.use(express.static(__dirname+ '/public',{maxAge:config.staticMaxAge}));//设置静态文件夹和静态缓存
 
 
 http.createServer(app).listen(app.get('port'), function(){
