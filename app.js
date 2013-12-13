@@ -3,7 +3,6 @@
  * Module dependencies.
  */
 
-var cluster = require('cluster');//多进程模块
 var express = require('express');
 var routes = require('./routes');//加载路由
 var http = require('http');
