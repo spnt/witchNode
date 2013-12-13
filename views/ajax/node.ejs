@@ -1,0 +1,7 @@
+<ul>
+    <% nodes.forEach(function(node){%>
+        <li id="<%=node._id%>" onmouseout="manageui.hidlabel('<%=node._id%>')" onmouseover="manageui.dislabel('<%=node._id%>')">
+            <span id="1_<%=node._id%>" ><%=node.nodeName%> </span><label> <a href="/editnode?id=<%=node._id%>">编辑</a> <a href="/addnode?pid=<%=node._id%>">添加子节点</a> </label><ul class='ajax'><li>{url:/node/page?pid=<%=node._id%>}</li></ul>
+        </li>
+    <% })%>
+</ul>
