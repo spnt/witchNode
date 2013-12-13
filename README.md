@@ -63,7 +63,9 @@ Witch Node是一个以Express框架开发的用于快速开发建站的程序，
    npm config set registry http://registry.cnpmjs.org
    npm info underscore （如果上面配置正确这个命令会有字符串response）
 ````````
-  3，运行。注：本系统并没有写cluster的相关操作，生产环境请使用PM2，默认端口号3000，可在配置文件中修改
+  3,安装Redis和mongodb，并修改config.js中的相关配置
+
+  4，运行。注：本系统并没有写cluster的相关操作，生产环境请使用PM2，默认端口号3000，可在配置文件中修改
 ``````````js
   node app.js
 ``````````
