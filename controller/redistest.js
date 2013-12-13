@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var home = {},
-    redisCache=require('../dataapi/redisApi.js'),
+    redisCache=require('../modules/redisApi.js'),
     userApi = require('../dataapi/userApi.js'),
     articleApi = require('../dataapi/articleApi.js'),
     tools=require('../modules/tools.js');

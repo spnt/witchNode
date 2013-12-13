@@ -32,41 +32,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.favicon());
-//app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 
-app.use(express.static(path.join(__dirname, 'public')));//设置静态文件夹
+app.use(express.static(path.join(__dirname, 'public',{maxAge:config.staticMaxAge})));//设置静态文件夹和静态缓存
 
 
-/*var _userCluster = function(callback) {//定义的Cluster使用方法
-    var numCPUs = config.ClusterNum;
-    if (cluster.isMaster) {
-        for (var i = 0; i < numCPUs; i++) {
-            cluster.fork();
-        }
-
-        cluster.on('exit', function(worker, code, signal) {
-            console.log('worker ' + worker.process.pid + ' died');
-        });
-    } else {
-        callback();
-    }
-};*/
-
-/*if (process.env.NODE_ENV == 'production') {//生产环境
-    _userCluster(function(){
-        http.createServer(app).listen(app.get('port'), function(){
-            console.log('Express server listening on port ' + app.get('port'));
-        });
-    })
-}
-else{//开发环境
-    http.createServer(app).listen(app.get('port'), function(){
-        console.log('Express server listening on port ' + app.get('port'));
-    });
-}*/
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });

@@ -1,8 +1,11 @@
-var home = {};
 
-home.index = function(req, res){
+var home = {}
+    redisCache=require('../dataapi/redisApi.js'),
+    tools=require('../modules/tools.js');
+
+home.index = function(req, res){//默认35M的内存
     //这是一个把模版内容写入redis缓存的例子
-    /*redisCache.get('index',function(err,doc){
+    redisCache.get('index',function(err,doc){
         if(err){
             res.send(err);
             return;
@@ -19,8 +22,7 @@ home.index = function(req, res){
             res.send(html);
             return;
         });
-    })*/
-    res.send('asd');
+    })
     return;
 }
 

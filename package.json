@@ -1,7 +1,11 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
+  "name": "Witch Node",
+  "version": "0.1.2",
   "private": true,
+  "author":"左盐",
+  "E-mail":"huabinglan@163.com",
+  "description":"web site Tools",
+  "OS":"*inux and Windows",
   "scripts": {
     "start": "node app.js"
   },
@@ -12,7 +16,6 @@
     "mongoose":"3.8.x",
     "log4js":"*",
     "redis":"*",
-    "generic-pool":"1.0.6",
-     "cluster":"*"
+    "generic-pool":"1.0.6"
   }
 }

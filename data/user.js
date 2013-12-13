@@ -7,7 +7,7 @@
  */
 
 //用户数据 mongodb 访问层
-var mongo = require('./mongo.js'),
+var mongo = require('../modules/mongo.js'),
     schema=mongo.mongoose.Schema;
 
 var userSchema=new schema({//数据模型定义
