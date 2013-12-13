@@ -63,5 +63,45 @@ Witch Node是一个以Express框架开发的用于快速开发建站的程序，
   node app.js
 ``````````
 
-####未完 待续
+##项目模块介绍
+####路由规则
+Express默认的路由规则是形如这样的：
+
+````````js
+module.exports = function(app) {
+  app.get('/', function (req, res) {
+	//TODO:
+  });
+  app.get('/reg', function (req, res) {
+    //TODO
+  });
+  app.post('/reg', function (req, res) {
+   //TODO
+  });
+}
+``````````
+
+这样的结构虽然每个单元都很好理解，但把TODO补完，页面将变的复杂无比，满眼都是一坨一坨的代码，就算是拆分了文件，这个路由页面仍然存在了很多的页面逻辑。为了避免这个非常不优雅的问题，我改写了下路由的运行方法(没有更改Express，还得做无障碍升级呢)。
+
+````````js
+module.exports=function(app){
+    app.all('*',function(req,res){
+        var upath=req.path,
+            urlpath=upath.split('/');
+        urlpath.shift();
+        if(urlpath[urlpath.length-1]==''){
+            urlpath.pop();
+        }
+       if(upath=='/'){
+               urlpath=new Array('index','index');
+           }
+       if(urlpath.length==1){
+               urlpath.push('index');
+         }
+       require('../controller/'+urlpath[0])[urlpath[1]](req, res);
+    });
+}
+```````````
+
+
 
