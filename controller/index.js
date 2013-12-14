@@ -42,7 +42,7 @@ home.login=function(req,res){
         }
         res.cookie('username',doc.userName);
         res.cookie('id',doc._id.toString());
-        res.cookie('ckey',tools.md5(doc._id.toString()+config.keySalt));
+        res.cookie('ckey',tools.md5(doc._id.toString()+config.keySalt));//最好也添加ip和User-Agent
         res.redirect('/default');
     });
 }
