@@ -22,15 +22,8 @@ var userApi = {},
  */
 userApi.isLogin = function(req, res){
     var uid =req.cookies.id,
-        key=req.cookies.ckey,
         username=req.cookies.username;
-
-    if(!uid||md5(uid+config.keySalt)!=key) {
-        res.redirect('/');
-        return false;
-    }
-    else
-        return new Array(uid,username);
+      return new Array(uid,username);
 }
 
 /*
