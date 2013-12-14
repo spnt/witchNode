@@ -11,7 +11,7 @@ var home = {},
 
 home.index = function(req, res){
     var userBasic=userApi.isLogin(req,res);
-        res.render('default',{user_loginid:userBasic[0],user_loginname:userBasic[1]});
+    res.render('default',{user_loginid:userBasic[0],user_loginname:userBasic[1]});
 }
 
 module.exports = home;

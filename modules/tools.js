@@ -129,6 +129,17 @@ tools.subTime=function(time1,time2){
     return (t2.getTime()-t1.getTime())/1000;//时间差的秒数
 }
 /**
+ * 从ObjectId中获取时间
+ * 生成格式:2013-12-14 10:58:35
+ * @param ObjectId
+ * @returns {string}
+ */
+tools.getObjectIdTime=function(ObjectId){
+    var time=parseInt(ObjectId.substring(0,8),16);
+    var now = new Date(time * 1000);
+    return now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+}
+/**
  * 格式化时间
  * @param format
  * @returns {string}
