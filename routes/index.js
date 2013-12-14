@@ -28,7 +28,6 @@ module.exports=function(app){
                   return  res.redirect('/');
               }
           }
-          console.log(urlpath.join('/'));
           require('../controller/'+urlpath[0])[urlpath[1]](req, res);
         }
         catch(err){
