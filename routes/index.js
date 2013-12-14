@@ -3,6 +3,9 @@
  * 整站路由
  * 此方法接管所有非静态请求
  */
+
+
+var config=require('../config.js');
 module.exports=function(app){
     app.all('*',function(req,res){
       try{
@@ -21,8 +24,7 @@ module.exports=function(app){
               var uid =req.cookies.id,
                   key=req.cookies.ckey;
               if(!uid||md5(uid+config.keySalt)!=key) {
-                  res.redirect('/');
-                  return;
+                  return  res.redirect('/');
               }
           }
           require('../controller/'+urlpath[0])[urlpath[1]](req, res);
