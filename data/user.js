@@ -48,10 +48,7 @@ User.findone=function(userId,callback){
 User.login=function(uname,callback){
     user.findOne({userName:uname},function(err,doc){
         callback(err,doc);
-    })
-     /*u user.findById('52a57a0b7f89267838000001',function(err,doc){
-        callback(err,doc);
-    })*/
+    });
 }
 
 

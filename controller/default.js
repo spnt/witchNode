@@ -7,11 +7,15 @@
  */
 var home = {},
     userApi = require('../dataapi/userApi.js');
+
+
 home.index = function(req, res){
     var userBasic=userApi.isLogin(req,res);
     if(userBasic){
         res.render('default',{user_loginid:userBasic[0],user_loginname:userBasic[1]});
+        return;
     }
+    res.redirect('/');
     return;
 }
 

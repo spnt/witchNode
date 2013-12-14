@@ -8,7 +8,7 @@
 
 var mongoose = require("mongoose"),
     config=require('../config');
- mongoose.connect('mongodb://192.168.1.207:10000/rrest');//config.MongodbConnectString
+ mongoose.connect(config.MongodbConnectString);
 
 exports.mongoose=mongoose;
 

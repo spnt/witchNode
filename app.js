@@ -32,6 +32,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.favicon());
 app.use(express.json());
+app.use(express.cookieParser());//使用cookie
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 

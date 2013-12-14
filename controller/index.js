@@ -1,7 +1,9 @@
 
-var home = {}
+var home = {},
     redisCache=require('../modules/redisApi.js'),
-    tools=require('../modules/tools.js');
+    tools=require('../modules/tools.js'),
+    userApi=require('../dataapi/userApi.js'),
+    config=require('../config.js');
 
 home.index = function(req, res){//默认35M的内存
     //这是一个把模版内容写入redis缓存的例子
@@ -27,19 +29,40 @@ home.index = function(req, res){//默认35M的内存
 }
 
 home.login=function(req,res){
-    if(req.method !== 'POST') return res.redirect('/');
+    if(req.method != 'POST') {
+        res.redirect('/');
+        return;
+    }
      var uname=req.body.username,
-        psd=req.body.password;
+        psd=req.body.password;//生产中传输过来的密码应该加密，而且应该提高密码复杂度，防止碰撞
     userApi.login(uname,psd,function(err,doc){
         if(err) {
-            res.render('/index.ejs',{cuo:'密码错误',err:err});
+            res.render('index',{cuo:'密码错误',err:err});
             return;
         }
         res.cookie('username',doc.userName);
         res.cookie('id',doc._id.toString());
-        res.cookie('ckey',tools.md5(doc._id.toString()+"yan"));
+        res.cookie('ckey',tools.md5(doc._id.toString()+config.keySalt));
         res.redirect('/default');
     });
+}
+
+/**
+ * 临时方法，创建一个登录用户
+ */
+home.insert=function(req,res){
+   var userInfo={
+       userName:'root',
+       password:tools.md5('123456'+config.md5Salt)//默认前台传输过来的密码(123456)需要加密，这里就省略了
+   };
+    userApi.insert(userInfo,function(err){
+        if(err){
+            res.send(err);
+            return;
+        }
+        res.send('创建成功');
+        return;
+    })
 }
 
 

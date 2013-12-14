@@ -7,7 +7,9 @@ module.exports = {
     uploadFolder:'/tmp/upload', //文件上传的临时目录
     postLimit:1024*1024*100,//限制上传的postbody大小，单位byte
     webTitle:'左盐的node',//网站标题
-    staticMaxAge : 604800000, //静态文件的缓存周期，建议设置为7天，单位毫秒
+    staticMaxAge:604800000, //静态文件的缓存周期，建议设置为7天，单位毫秒
+    md5Salt:'XDq-MW.Q',//供后端加密使用的盐
+    keySalt:'H0UK*Lwd',//供前端加密使用的盐
 //session配置
     isSession:false, //是否开启session，开启会影响性能。
     syncSession:true,//当多进程时是否开启session同步，开启会影响性能。
@@ -22,11 +24,10 @@ module.exports = {
     logMaxSize:1024*1024*10, //单个日志文件大小
     logFileNum:10, //当单个日志文件大小达标时，自动切分，这里设置最多切分多少个日志文件
 //mongodb 配置
-    MongodbConnectString:'mongodb://192.168.1.207:10000,192.168.1.207:20000,192.168.1.207:30000/?safe=true&replicaSet=Friend&slaveOk=true&w=2&wtimeoutMS=2000', //MongoDB连接字符串
+    MongodbConnectString:'mongodb://192.168.1.207:10000,192.168.1.207:20000,192.168.1.207:30000/rrest?safe=true&replicaSet=Friend&slaveOk=true&w=2&wtimeoutMS=2000', //MongoDB连接字符串
 //redis配置
     redisPort:'6379',
     redisIp:'192.168.1.207',
     redisMaxPoll:300,//redis最大连接池
     redisDataBase:'zuoyan'//默认使用的redis数据库
-
 }
