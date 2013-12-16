@@ -31,7 +31,7 @@ module.exports=function(app){
           require('../controller/'+urlpath[0])[urlpath[1]](req, res);
         }
         catch(err){
-            res.send(err);
+            res.send(err.toString());
         }
     });
 }
