@@ -15,12 +15,12 @@ var redisCache = {},
          if(!this.pools[database]){
              this.pools[database]=this.makePool(database);//创建连接池
          }
-          this.pools[database].acquire(function(resource){//从连接池中获取连接
-              callback(resource);
+          this.pools[database].acquire(function(err,client){//从连接池中获取连接
+              callback(client);
           })
        },
-       release:function(database,resource){//释放数据库database的连接resource
-           this.pools[database]&&this.pools[database].release(resource);
+       release:function(database,client){//释放数据库database的连接client
+           this.pools[database]&&this.pools[database].release(client);
        },
        pools:{},// Cache of pools by database name.
        makePool: function(database){//Factory for pool objects.
@@ -28,19 +28,19 @@ var redisCache = {},
             name:'redis',
             create:function(callback){
                 var client=redis.createClient(config.redisPort,config.redisIp);
-                client.on('connect', function () {
+                client.on('connect', function (){
                     client.send_anyway = true;
                     client.select(database);
                     client.send_anyway = false;
                 });
-                callback(client);
+                callback(null,client);
             },
             destroy:function(client){//实现释放连接
                 return client.quit();
             },
-            max:5000,
-            idleTimeoutMillis: 10000,//连接超时时间
-            reapIntervalMillis: 3600,//连接失效时间
+            max:config.redisMaxPoll,
+            min:2,
+            idleTimeoutMillis: config.redisTimeOut,
             log: false
         });
        }

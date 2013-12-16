@@ -9,16 +9,17 @@ home.index = function(req, res){//默认35M的内存
     //这是一个把模版内容写入redis缓存的例子
     redisCache.get('index',function(err,doc){
         if(err){
-            res.send(err);
+            res.send(err+"]]");
             return;
         }
         if(doc){//如果doc存在
-            res.send(doc);
+            res.send(doc+"]]");
             return;
         }
         res.render('index',{cuo:'',err:''},function(err,html){
             if(err){
-                res.send('模版读取错误');return;
+                res.send('模版读取错误');
+                return;
             }
             redisCache.set('index',html,100);
             res.send(html);

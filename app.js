@@ -9,7 +9,10 @@ var http = require('http');
 var path = require('path');
 var config=require('./config');//加载配置文件
 
+
 var app = express();
+
+
 // 开发环境
 app.configure('development', function() {
     app.use(express.logger('dev'));

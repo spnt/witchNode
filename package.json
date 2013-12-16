@@ -1,6 +1,6 @@
 {
-  "name": "Witch Node",
-  "version": "0.1.2",
+  "name": "WitchNode",
+  "version": "0.2.2",
   "private": true,
   "author":"左盐",
   "E-mail":"huabinglan@163.com",
@@ -16,6 +16,6 @@
     "mongoose":"3.8.x",
     "log4js":"*",
     "redis":"*",
-    "generic-pool":"1.0.6"
+    "generic-pool":"*"
   }
 }

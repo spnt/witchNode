@@ -2,6 +2,8 @@
 module.exports = {
 //自定义配置
 //通用配置
+    //运行环境配置
+
    //web属性配置
     listenPort:3000,//监听端口
     uploadFolder:'/tmp/upload', //文件上传的临时目录
@@ -28,6 +30,7 @@ module.exports = {
 //redis配置
     redisPort:'6379',
     redisIp:'192.168.1.207',
-    redisMaxPoll:300,//redis最大连接池
-    redisDataBase:'zuoyan'//默认使用的redis数据库
+    redisMaxPoll:500,//redis最大连接池
+    redisTimeOut:600000,//连接超时时间//单位ms//现在定义为10分钟
+    redisDataBase:1//默认使用的redis数据库下标，默认从0开始
 }
