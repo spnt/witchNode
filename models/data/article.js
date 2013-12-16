@@ -9,7 +9,7 @@
 //用户数据 mongodb 访问层
  var Article= { };
 
-var mongo = require('../modules/mongo.js'),
+var mongo = require('../../lib/mongo.js'),
     schema=mongo.mongoose.Schema;
 
 var articleSchema=new schema({//数据模型定义

@@ -7,7 +7,7 @@
  */
 var home = {},
     title = _rrest.config.webtitle,
-    userApi = require('../dataapi/userApi.js');
+    userApi = require('../models/userApi.js');
 
 home.index = function(req, res){
     var userBasic=userApi.isLogin(req,res);

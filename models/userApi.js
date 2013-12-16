@@ -10,9 +10,9 @@
  *callback的返回值作为本函数的返回值
  */
 var userApi = {},
-    User= require('../data/user.js')
-    config=require('../config.js'),
-    md5 =require('../modules/tools').md5;
+    User= require('./data/user.js')
+    config=require('../config/config.js'),
+    md5 =require('../lib/tools').md5;
 
 
 /*

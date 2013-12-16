@@ -1,9 +1,9 @@
 
 var home = {},
-    redisCache=require('../modules/redisApi.js'),
-    tools=require('../modules/tools.js'),
-    userApi=require('../dataapi/userApi.js'),
-    config=require('../config.js');
+    redisCache=require('../lib/redisApi.js'),
+    tools=require('../lib/tools.js'),
+    userApi=require('../models/userApi.js'),
+    config=require('../config/config.js');
 
 home.index = function(req, res){//默认35M的内存
     //这是一个把模版内容写入redis缓存的例子

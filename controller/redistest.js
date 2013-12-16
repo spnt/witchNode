@@ -7,8 +7,8 @@
  */
 var home = {},
     redisCache=require('../modules/redisApi.js'),
-    userApi = require('../dataapi/userApi.js'),
-    articleApi = require('../dataapi/articleApi.js'),
+    userApi = require('../models/userApi.js'),
+    articleApi = require('../models/articleApi.js'),
     tools=require('../modules/tools.js');
 
 

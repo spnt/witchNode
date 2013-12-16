@@ -6,8 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 var home = {},
-    userApi = require('../dataapi/userApi.js'),
-    nodeApi=require('../dataapi/nodeApi.js');
+    userApi = require('../models/userApi.js'),
+    nodeApi=require('../models/nodeApi.js');
 home.index = function(req, res){
     var userBasic=userApi.isLogin(req,res);
     if(userBasic){

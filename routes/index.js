@@ -5,8 +5,8 @@
  */
 
 
-var config=require('../config.js'),
-    tools=require('../modules/tools.js');
+var config=require('../config/config.js'),
+    tools=require('../lib/tools.js');
 module.exports=function(app){
     app.all('*',function(req,res){
       try{

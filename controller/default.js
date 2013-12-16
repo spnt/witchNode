@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var home = {},
-    userApi = require('../dataapi/userApi.js');
+    userApi = require('../models/userApi.js');
 
 
 home.index = function(req, res){
