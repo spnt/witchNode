@@ -70,6 +70,15 @@ Witch Node是一个以Express框架开发的用于快速开发建站的程序，
   node app.js
 ``````````
 ********************
+设置开发环境命令：
+
+````js
+linux：NODE_ENV=production
+
+windows:set NODE_ENV=production
+````
+
+************************
 本系统目前在windows和CentOS上做过测试，暂未发现问题。
 
 生产环境请用PM2来做多进程和故障重启
