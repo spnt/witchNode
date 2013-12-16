@@ -7,17 +7,20 @@
 
 var config=require('../config/config.js'),
     tools=require('../lib/tools.js');
+
 module.exports=function(app){
     app.all('*',function(req,res){
       try{
            var upath=req.path,
                urlpath=upath.split('/'),
-               len=urlpath.length;
+               len=0;
+
           if(upath.indexOf('.')>-1||urlpath.length>5){
               res.send('这是一个错误地址');
               return;
           }
            urlpath.shift();
+          len=urlpath.length;
            if(urlpath[len-1]===''){urlpath.pop();}
            if(upath==='/'){urlpath=new Array('index','index');}
            if(urlpath.length===1){ urlpath.push('index');}
@@ -28,6 +31,7 @@ module.exports=function(app){
                   return  res.redirect('/');
               }
           }
+          //console.log(urlpath.join('/'));
           require('../controller/'+urlpath[0])[urlpath[1]](req, res);
         }
         catch(err){

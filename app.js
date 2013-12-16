@@ -39,7 +39,7 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 
 app.use(express.static(__dirname+ '/public',{maxAge:config.staticMaxAge}));//设置静态文件夹和静态缓存
-
+//app.use(express.bodyParser({uploadDir:'./public/tmp'}));//设置上传临时目录//本程序暂不提供上传功能的封装
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

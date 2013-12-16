@@ -26,7 +26,7 @@ module.exports = {
     logMaxSize:1024*1024*10, //单个日志文件大小
     logFileNum:10, //当单个日志文件大小达标时，自动切分，这里设置最多切分多少个日志文件
 //mongodb 配置
-    MongodbConnectString:'mongodb://192.168.1.207:10000,192.168.1.207:20000,192.168.1.207:30000/rrest?safe=true&replicaSet=Friend&slaveOk=true&w=2&wtimeoutMS=2000', //MongoDB连接字符串
+    MongodbConnectString:'mongodb://192.168.1.207:10000,192.168.1.207:20000,192.168.1.207:30000/rrest?safe=true&replicaSet=Friend&slaveOk=true&w=2&wtimeoutMS=2000&maxPoolSize=15', //MongoDB连接字符串
 //redis配置
     redisPort:'6379',
     redisIp:'192.168.1.207',
