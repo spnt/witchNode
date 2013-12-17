@@ -12,6 +12,8 @@ module.exports = {
     staticMaxAge:604800000, //静态文件的缓存周期，建议设置为7天，单位毫秒
     md5Salt:'XDq-MW.Q',//供后端加密使用的盐
     keySalt:'H0UK*Lwd',//供前端加密使用的盐
+    loginTimes:3,//登录次数，超出则锁定
+    lockUserTime:1800,//锁定时间，单位秒
     webDomain:'192.168.1.202:3000',//网站主域名，用于判断Referer
 //session配置
     isSession:false, //是否开启session，开启会影响性能。

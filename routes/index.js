@@ -4,7 +4,6 @@
  * 此方法接管所有非静态请求
  */
 
-
 var config=require('../config/config.js'),
     tools=require('../lib/tools.js');
 
