@@ -4,7 +4,7 @@
     <meta name="robots" content="noindex,nofollow" />
     <title>后台登陆</title>
     <link href="/css/login.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
             VTip();
@@ -17,6 +17,8 @@
         }
         function Login() {
             if (VTip()) {
+                var expires = new Date((new Date()).getTime()+1000);
+                document.cookie = "csrf=387205c31b2; expires=" + expires.toGMTString();
                 document.forms[0].submit();
             }
         }

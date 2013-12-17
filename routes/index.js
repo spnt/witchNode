@@ -11,6 +11,7 @@ var config=require('../config/config.js'),
 module.exports=function(app){
     app.all('*',function(req,res){
       try{
+          //console.log(req.headers.referer+"]")
            var upath=req.path,
                urlpath=upath.split('/'),
                len=0;

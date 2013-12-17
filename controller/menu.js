@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var home = {},
-    md5 =require('../modules/tools').md5;
+    md5 =require('../lib/tools.js').md5;
 
 home.getmenu=function(req,res){
     var menu=req.body.menu;

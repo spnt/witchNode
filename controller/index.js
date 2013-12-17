@@ -30,8 +30,8 @@ home.index = function(req, res){//默认35M的内存
 }
 
 home.login=function(req,res){
-    if(req.method != 'POST') {
-        res.redirect('/');
+    if(!tools.checkCSRF(req,'POST')){
+        res.send('没有reffer或者csrf参数不正确');
         return;
     }
      var uname=req.body.username,
