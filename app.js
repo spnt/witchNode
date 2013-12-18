@@ -30,7 +30,9 @@ app.configure('production', function() {
 // all environments
 app.set('port', config.listenPort);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+
+app.set('view engine', 'html');//修改ejs模板扩展名为html
+app.engine('html', require('ejs').__express);
 
 app.use(express.favicon());
 app.use(express.json());

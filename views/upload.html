@@ -1,0 +1,16 @@
+<%- include /include/head.html %>
+<link type="text/css" rel="stylesheet" href="css/jquery.simple.tree.css" />
+<script type="text/javascript" src="js/jquery.simple.tree.js"></script>
+<script type="text/javascript" src="js/node.js"></script>
+
+<div id="main">
+    <div id="mainleft">
+    </div>
+    <div id="mainright">
+        <form action="/upload/up" method="post" enctype="multipart/form-data">
+            <input type="file" name="thu">
+            <input type="submit">
+        </form>
+    </div>
+</div>
+<%- include /include/footer.html %>

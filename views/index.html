@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="robots" content="noindex,nofollow" />
+    <title>后台登陆</title>
+    <link href="http://static1.example.com/css/login_e4c8f26.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="http://static1.example.com/js/jquery-1.7.1.min_b3560fc.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            VTip();
+            //window.sessionStorage.clear();
+        });
+        function PostLogin(event) {
+            if (event.keyCode == 13) {
+                Login();
+            }
+        }
+        function Login() {
+            if (VTip()) {
+                var expires = new Date((new Date()).getTime()+1000);
+                document.cookie = "csrf=387205c31b2; expires=" + expires.toGMTString();
+                document.forms[0].submit();
+            }
+        }
+        function VTip() {
+            if (!window.sessionStorage) {
+                alert("本系统后台不支持您所使用的浏览器，请换用火狐或google浏览器");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+<form name="form1" method="post" action="/index/login" id="form1">
+    <div id="moji"></div>
+    <div id="denglu">
+        <div id="d_left"></div>
+        <div id="d_centre">
+            <p class="yong"><span class="wenzi">用户名：</span>
+                <span class="in_1"><img src="http://static1.example.com/img/in_1_aef5059.png"  /></span>
+                <input type="text" name="username" value=""/><span class="in_2"><img src="http://static1.example.com/img/in_2_b286e61.png"></span>
+            </p>
+            <p class="mima">
+                <span class="wenzi">密码：</span>
+
+                <span class="in_5"><img src="http://s2.example.com/img/in_5_ef6d9b7.png"  /></span>
+                <input type="password" name="password" onkeypress="PostLogin(event)" value=""/><span class="in_2"><img src="http://static1.example.com/img/in_4_03c8ceb.png"></span>
+            </p>
+            <p class="anniu">
+                <a href="javascript:Login();" style="float:right;margin-right:10px;" id="login"><img src="http://s2.example.com/img/anniu_0953676.png"  /></a><span id="Label1"><%=cuo%><%=err%></span></p>
+        </div>
+        <div id="d_right"></div>
+    </div>
+    <div id="xia">
+        <p>版权所有：xxxxxx有限公司</p>
+    </div>
+</form>
+</body>
+</html>

@@ -19,7 +19,7 @@ home.index = function(req, res){//默认35M的内存
         }
         res.render('index',{cuo:'',err:''},function(err,html){
             if(err){
-                res.send('模版读取错误');
+                res.send(err);
                 return;
             }
             redisCache.set('index',html,100);

@@ -1,0 +1,91 @@
+<%- include /include/head.html %>
+
+<style>
+    #articlereco{width:70px;height:135px;position:absolute;top:33px;left:134px;background-color:#9DACC0;display:none;padding-left:5px;}
+</style>
+<div id="main">
+    <div id="mainleft">
+    </div>
+    <div id="mainright">
+        <div class="listmain">
+            <div id="listitem" style="visibility:visible;position: fixed;width:800px;height:29px;background-color:#f1f5fa;">
+                <span><input type="text" name="title" id="modulekw" /><a href="javascript:manageModule.Page(1,20);" title="">搜索</a></span><a href="/addarticle" title="">添加文章</a> | <a href="javascript:manageArticle.Passed('0','true');" title="">审核已选</a> | <a title="" href="javascript:manageArticle.CloseArticle('0','true')">关闭已选</a>
+            </div>
+            <div id="listoption" style="visibility:visible;position: fixed;width:800px;height:29px;background-color:#f1f5fa; z-index: 1;">
+                <input type="checkbox" id="checkall" onclick=" ManageTool.SelectAll('list',this);" /><label for="checkall">全选</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;当前第<span id="articlecp">1</span>页
+            </div>
+            <div id="listitem">
+            </div>
+            <div  style="width:100%;height:600px;min-height:600px;height:auto !important;overflow:visible;margin-top:26px;">
+                <ul id="list">
+
+                    <% articles.forEach(function(article){%>
+                        <li id="article_<%=article._id%>" onmouseover="manageui.dislabel('article_<%=article._id%>')" onmouseout="manageui.hidlabel('article_<%=article._id%>')"><input type="checkbox" value="<%=article._id%>" id="house_check_<%=article._id%>"/><a class="baseball" href="<%=article.link%>" target="_blank" title="<%=article.title%> 由 <%=article.subuser%> 发布于<%=article.subdate%>"><span><%=article.title%></span></a>
+                            <% if(article.timg!=''){%>
+                            <a class="img" style="margin-left:1px;margin-right:1px;" href="javascript:void(0);"><span class="icon_img">t</span><span class="ibox"><img width="132" height="87" onload="fitImg(this,160,160)" src="<%=article.timg%>" /></span></a>
+                            <%}%>
+                            [<span style="color:#8A24C8;"><%=article.count%>/<%=article.comment%></span>]
+                            <% if(article.state==0){%>
+                                <span style="color:red;" class="articlepass<%=article._id%>">未审核</span>
+                            <%}%>
+                            <label>
+                            <% if(article.state==0){%>
+                                  <a href="javascript:manageArticle.Passed('<%=article._id%>','true')" >审核</a>
+                             <%}%>
+                             <a href="/manage/pages/addarticle.aspx?id={$article["articleid"]}&nid={$article["nodeid"]}" title="">编辑</a><a href="javascript:manageComment.ManagePage({$article["articleid"]},'article_{$article["articleid"]}')" title="">查看评论</a><a href="javascript:manageArticle.CloseArticle({$article["articleid"]},'true')" title="">关闭</a>
+
+
+                        </label></li>
+                    <%})%>
+                </ul>
+            </div>
+        </div>
+        <script language="javascript" type="text/javascript">
+            function subform(){
+                document.forms[0].submit();
+            }
+            $(document).ready(function() {
+                $("#articlenode").val("<%=user_loginid %>");
+                $(".listjiantou").css("top", "100px");
+                $("#userid").val("<%=user_loginid %>");
+            });
+            function SwitchRecycle() {
+                document.location.href = "/manage/pages/articleRecycle.aspx";
+            }
+            function FormArticleReco() {
+                $("#articlereco").css({ "display": "block" });
+            }
+            function FromArticleRecoHide() {
+                $("#articlereco").css({ "display": "none" });
+            }
+            function fitImg(I, fw, fh) {//按比例缩放图片(对象，宽，高)
+                var i = new Image();
+                i.src = I.src;
+                if (i.width > 0 && i.height > 0) {
+                    if (i.width / i.height >= fw / fh) {
+                        if (i.width > fw) {
+                            I.width = fw;
+                            I.height = (i.height * fw) / i.width;
+                        }
+                        else {
+                            I.width = i.width;
+                            I.height = i.height;
+                        }
+                    }
+                    else {
+                        if (i.height > fh) {
+                            I.height = fh;
+                            I.width = (i.width * fh) / i.height;
+                        }
+                        else {
+                            I.width = i.width;
+                            I.height = i.height;
+                        }
+                    }
+                }
+            }
+        </script>
+    </div>
+</div>
+<%- include /include/footer.html %>

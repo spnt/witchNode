@@ -1,0 +1,246 @@
+<%- include /include/head.html %>
+<link type="text/css" rel="stylesheet" href="/css/jquery.simple.tree.css" />
+<script type="text/javascript" src="/js/jquery.simple.tree.js"></script>
+<script type="text/javascript" src="/js/node.js"></script>
+<style>
+    #pw p{margin:10px;line-height:30px;}
+    #pw img{margin:10px;border:1px solid #8594A9;padding:3px;}
+    #uploadswf{vertical-align:middle;display:inline-block;margin-top:-3px;}
+    #mark{vertical-align:middle;}
+    #isaddtitle{vertical-align:middle;}
+</style>
+
+<div id="main">
+    <div id="mainleft">
+    </div>
+    <div id="mainright">
+        <div class="mainparent">
+        <ul id="inputmain">
+            <li>
+                <span class="icon_post"> 标题</span>
+                <input type="text" id="title" style="width:400px;" size="60"  onchange="javascript:lenstr();"/><span id="titleTip" style="color:Red;margin:auto 5px;font-size:14px;"></span>
+            </li>
+            <li >
+                <span class="icon_post"> 栏目名称</span>
+                <asp:Literal ID="nodelist" runat="server"></asp:Literal>
+            </li>
+            <li>
+                <span class="icon_post">  标题图片</span><input type="text" ID="imgurl"  style="width:270px;" onclick="manageArticle.UploadFile('imgurl');"/><a href="javascript:manageArticle.UploadFile('imgurl')">上传</a>
+            </li>
+            <li>
+                <span class="icon_post"> 属性</span><select id="state">
+                <option value="1" selected="selected">审核</option>
+                <option value="0">未审核</option>
+                <option value="-9">关闭</option>
+            </select>
+                <span>推荐：<select id="isreco"><option value="0">不推荐</option><option value="1">1级推荐</option><option value="2">2级推荐</option><option value="3">3级推荐</option><option value="4">4级推荐</option><option value="10">推荐到专题</option></select></span>
+            </li>
+            <li>
+                <span class="icon_post">连接地址</span>
+                <input type="text" ID="linkurl" size="50" /><span id="linkurlTip"></span>
+            </li>
+            <li id="custombef">
+                <span class="icon_post" style="vertical-align:top;">信息简介</span>
+                <textarea type="text" ID="Summary"  style="width:700px;height:100px;" ></textarea><span id="SummaryTip"></span>
+            </li>
+            <li style="vertical-align:middle;">
+                <span class="icon_post"> 批量上传</span><span id="uploadswf">
+     <embed type="application/x-shockwave-flash" src="/ext/swf/sapload.swf" style="" id="sapload" name="sapload" bgcolor="#ffffff" quality="high" flashvars="types=jpg;gif;png&amp;args=myid=111;yid=222;mark=false&amp;upUrl=/upload&amp;fileName=Filedata1&amp;maxNum=180&amp;maxSize=10&amp;etmsg=1&amp;ltmsg=1" height="25" width="450"></span><input type="checkbox" id="mark" onclick="javascript:changmark();" />添加水印&nbsp;<input type="button" value="添加到编辑器" onclick="addCkeditor()" style="height:25px;"/><input type="button" value="全部取消" onclick="javascript:clearimg('');" style="height:25px;"/><input type="checkbox" id="isaddtitle" checked="checked" />
+                <div id="pw" style="clear:both;width:700px;height:auto;">
+
+                </div>
+            </li>
+            <li>
+                <span class="icon_post"> 内容</span>&nbsp;&nbsp;<input type="button" id="addedit_2" value="添加到编辑器" onclick="addCkeditor()" style="height:25px;"/><input id="addmark_2" type="checkbox"/>
+                <textarea id="content"></textarea>
+            </li>
+            <li style="display:none;">
+                <span class="icon_post"> 作者</span>
+                <input type="text" ID="author"   reg=" " min="0" max="20"  showmsg="此处如果不填写，将会显示您的注册名称" focusmsg="请输入您的笔名" correctmsg="" lengmsg="此处须小于20个字符"/><span id="authorTip"></span>
+            </li>
+            <li>
+                <span class="icon_post"> 来源</span>
+                <input type="text" ID="source" />
+            </li>
+            <li>
+                <span class="icon_post">标签</span><input type="text" ID="tag" style=" width: 260px;">
+            </li>
+            <li>
+                <span class="icon_post">  添加日期</span>
+                <input type="text" id="adddate" class="Wdate" value=""  />
+            </li>
+        </ul>
+        <p>
+            <input type="button" value="提交"  class="icon_buttonlan" onclick=" btnSendData();"/>&nbsp;&nbsp;<input type="button" value="返回" onclick="gotoPage();" class="icon_buttonlan"/>
+            <input type="hidden" value="" id="articleid"/>
+        </p>
+    </div>
+    <script charset="utf-8" src="/ext/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/ext/kindeditor/lang/zh_CN.js"></script>
+    <script language="javascript">
+        /*页面初始化*/
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('#content', {
+                width: "790px",
+                height:"530px",
+                themeType: "simple",
+                resizeMode: 1,
+                newlineTag: 'br',
+                uploadJson: '/ext/kindeditor/asp.net/upload_json.ashx',
+                fileManagerJson: '../asp.net/file_manager_json.ashx',
+                allowFileManager: false
+
+            });
+        });
+        var imgcount = 0;
+        var nodeid=getPart("nid");
+        if(nodeid==""){
+            nodeid=1;
+        }
+        else{
+            $("#articlenode").val(nodeid);
+        }
+        function changmark() {
+            if ($("#mark").attr("checked") == "checked") {
+                $("#uploadswf").html('<embed type="application/x-shockwave-flash" src="/ext/swf/sapload.swf" style="" id="sapload" name="sapload" bgcolor="#ffffff" quality="high" flashvars="types=jpg;gif;png&amp;args=myid=111;yid=222;mark=true&amp;upUrl=/pages/app/aupload.aspx&amp;fileName=Filedata1&amp;maxNum=180&amp;maxSize=10&amp;etmsg=1&amp;ltmsg=1" height="25" width="450">');
+            }
+        }
+
+        function lenstr() {
+            var len = 0;
+            var a = $('#title').val().split("");
+            for (var i = 0; i < a.length; i++) {
+                if (a[i].charCodeAt(0) < 299) {
+                    len++;
+                } else {
+                    len += 2;
+                }
+            }
+            if (len == 0) {
+                $('#titleTip').html("标题不能为空");
+            }
+            else {
+                $('#titleTip').html(len);
+            }
+
+        }
+        setTimeout(function() { lenstr(); }, 1000);
+        /*提交*/
+        function btnSendData(){
+            var aid=getPart("id");
+            if(aid==""){aid=$("#articleid").val();}
+            if(aid==""){
+                manageArticle.Create();
+            }
+            else{
+                manageArticle.Update(aid);
+            }
+        }
+
+        function gotoPage(){
+            document.location.href="/pages/article.aspx";
+        }
+
+        /*批量上传回调函数*/
+        function sapLoadMsg(t) {
+            //这里写法基于jqurey，当然你可以按自己的需要自行编写，请注意t是服务器处理上传脚本返回给flash的内容。
+            var pstr = $("#pw").html();
+            // spanid可以写正则来进行替换
+            var spanid = t.replace("../", '').replace(".", '').replace("/", '');
+            //此处 你想怎么写 就怎么写
+            var itml = pstr + '<div style="clear:both;width:700px;min-height:170px;" id="imgss_' + imgcount + '"><img id="articleimg_' + imgcount + '" src="' + t + '" style="width:150px;" /><div style="float: right;height: 150px;margin-right: 98px;margin-top: 10px;"><div>标题：<input id="imgtitle_' + imgcount + '" type="text" maxlength="24" style="width:300px;"/><input type="button" onclick="javascript:clearimg(\'imgss_'+imgcount+'\')" value="取消" style="height:19px;"></div><div>描述：<textarea id="imgtext_' + imgcount + '" style="margin-top:10px;width:320px;height:110px;"></textarea></div></div></div>';
+            imgcount=imgcount+1;
+            $("#pw").html(itml);
+        }
+        //清除上传的图片
+        function clearimg(imgcon) {
+            if (imgcon != "") {
+                $('#' + imgcon).remove();
+            }
+            else {
+                $("#pw").html('');
+            }
+        }
+        function fitImg(I, fw, fh) {//按比例缩放图片(对象，宽，高)
+            var i = new Image();
+            i.src = I.src;
+            if (i.width > 0 && i.height > 0) {
+                if (i.width / i.height >= fw / fh) {
+                    if (i.width > fw) {
+                        I.width = fw;
+                        I.height = (i.height * fw) / i.width;
+                    }
+                    else {
+                        I.width = i.width;
+                        I.height = i.height;
+                    }
+                }
+                else {
+                    if (i.height > fh) {
+                        I.height = fh;
+                        I.width = (i.width * fh) / i.height;
+                    }
+                    else {
+                        I.width = i.width;
+                        I.height = i.height;
+                    }
+                }
+            }
+        }
+
+        function addCkeditor() {
+            $("#pw>img").css("width", "400px");
+            var addtitle = "";
+            for(var i=0;i<imgcount;i++){
+                if($("#imgtitle_"+i).val()!=""){
+                    addtitle= $("#imgtitle_"+i).val();
+                    break;
+                }
+            }
+            var res = "";
+            res = "";
+            var str = "";
+            for (var i = 0; i < imgcount; i++) {
+                for (var j = parseInt(i+1); j < parseInt(imgcount + 1); j++) {
+                    if ($("#articleimg_" + j).length == 1) {
+                        str = "$";
+                        break;
+                    }
+                }
+                if ($("#articleimg_" + i).length == 1) {
+
+                    if (str == "$") {
+                        if ($("#isaddtitle").attr("checked") == "checked") {
+                            res += "<p style=\"text-align:center;\"><img title=\"" + addtitle + "\" alt=\"" + addtitle + "\" src=\"" + $("#articleimg_" + i).attr("src") + "\" /><p style=\"text-align:center;\">" + $("#imgtext_" + i).val() + "</p></p><div style=\"page-break-after: always;\"><span style=\"display: none;\">&nbsp;</span></div>";
+                        }
+                        else {
+                            res += "<p style=\"text-align:center;\"><img title=\"" + $("#imgtitle_" + i).val() + "\" alt=\"" + $("#imgtitle_" + i).val() + "\" src=\"" + $("#articleimg_" + i).attr("src") + "\" /><p style=\"text-align:center;\">" + $("#imgtext_" + i).val() + "</p></p><div style=\"page-break-after: always;\"><span style=\"display: none;\">&nbsp;</span></div>";
+                        }
+                    }
+                    else {
+                        if ($("#isaddtitle").attr("checked") == "checked") {
+                            res += "<p style=\"text-align:center;\"><img title=\"" + addtitle + "\" alt=\"" + addtitle + "\" src=\"" + $("#articleimg_" + i).attr("src") + "\" /><p style=\"text-align:center;\">" + $("#imgtext_" + i).val() + "</p></p>";
+                        }
+                        else {
+                            res += "<p style=\"text-align:center;\"><img title=\"" + $("#imgtitle_" + i).val() + "\" alt=\"" + $("#imgtitle_" + parseInt(imgcount - 1)).val() + "\" src=\"" + $("#articleimg_" + i).attr("src") + "\" /><p style=\"text-align:center;\">" + $("#imgtext_" + i).val() + "</p></p>";
+                        }
+                    }
+                }
+                str = "";
+            }
+            CKEDITOR.instances.content.setData(CKEDITOR.instances.content.getData() + res);
+            $("#pw").html('');
+            imgcount = 0;
+        }
+        if (getPart("id") != "") {
+            /*绑定附加属性*/
+            $(document).ready(function () {
+                manageArticle.Band(getPart("id"));
+                document.title = "编辑文章";
+            });
+        }
+    </script>
+    </div>
+</div>
+<%- include /include/footer.html %>

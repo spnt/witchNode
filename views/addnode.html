@@ -1,0 +1,42 @@
+<%- include /include/head.html %>
+<div id="main">
+    <div id="mainleft">
+    </div>
+    <div id="mainright">
+    <div class="mainparent">
+        <form method="post" action="/addnode/add">
+        <ul id="inputmain">
+            <li>
+                <span class="icon_post">栏目名称</span><input name="nodename" type="text" id="nodename"  /><span id="nodenameTip"></span>
+            </li>
+            <li>
+                <span class="icon_post">栏目图片地址</span><input name="imgurl1" type="text" id="imgurl1" style="width:397px;margin-right:10px;" /><a href="javascript:manageNode.UploadImg('imgurl1');" >重新上传</a>
+            </li>
+            <li>
+                <span class="icon_post" style="margin-bottom:10px;">节点描述</span><br /><textarea name="content" rows="2" cols="20" id="content" style="width:700px;height:300px;"></textarea>
+            </li></ul>
+            <input type="hidden" id="pid" name="pid" />
+        <p class="sub_btn">
+            <input type="submit"  value="添加 " id="Button1" class="icon_buttonlan" isSubmit="true" />&nbsp;&nbsp;<input type="botton" name="Button2" value="取消" id="Button2" class="icon_buttonlan" /><span id="errormsg"></span></p>
+        </form>
+</div>
+</div>
+    <script charset="utf-8" src="/ext/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/ext/kindeditor/lang/zh_CN.js"></script>
+    <script language="javascript">
+        /*页面初始化*/
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('#content', {
+                themeType: "simple",
+                resizeMode: 1,
+                newlineTag: 'br',
+                uploadJson: '/static/ext/kindeditor/asp.net/upload_json.ashx',
+                fileManagerJson: '../asp.net/file_manager_json.ashx',
+                allowFileManager: false
+
+            });
+        });
+        $("#pid").val(getPart('pid'));
+    </script>
+    <%- include /include/footer.html %>
