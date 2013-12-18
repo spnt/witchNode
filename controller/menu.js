@@ -11,10 +11,10 @@ var home = {},
 home.getmenu=function(req,res){
     var menu=req.body.menu;
     if(menu=='index'){//获取主菜单
-        res.render('leftmenu/index');
+        res.render('leftmenu/index.html');
     }
     else{//获取子菜单
-        res.render('leftmenu/'+menu);
+        res.render('leftmenu/'+menu+'.html');
     }
 }
 
