@@ -16,7 +16,7 @@ module.exports=function(app){
                len=0;
 
           if(upath.indexOf('.')>-1||urlpath.length>5){
-              res.send('这是一个错误地址');
+               res.render('error',{'error':'这是一个错误地址'});
               return;
           }
            urlpath.shift();
@@ -35,7 +35,7 @@ module.exports=function(app){
           require('../controller/'+urlpath[0])[urlpath[1]](req, res);
         }
         catch(err){
-            res.send(err.toString());
+             res.render('error',{'error':err.toString()});
         }
     });
 }
