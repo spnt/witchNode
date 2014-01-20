@@ -150,7 +150,6 @@ require('../controller/'+urlpath[0])[urlpath[1]](req, res);
 
 EJS语法
 ==========
-选择EJS的原因仅仅是：我需要一个简单快速的模版，而不用考虑模版本身过多的东西
 
 EJS只有三种标签：
 > <% code %>：JavaScript 代码。
