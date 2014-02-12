@@ -5,6 +5,7 @@
     <title>后台登陆</title>
     <link href="/css/login_3afd412.css" rel="stylesheet" type="text/css" />
     <script language="javascript" type="text/javascript" src="/js/jquery-1.7.1.min_b3560fc.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/witch.tool_38b67dc.js"></script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
             VTip();
@@ -56,5 +57,47 @@
         <p>版权所有：xxxxxx有限公司</p>
     </div>
 </form>
+<script>
+    function csrfTest() {
+        pageCookie.csrf();
+        $.ajax({
+            type: 'post',
+            url: '/index/csrftest',
+            data: 't=t',
+            success: function(msg) {
+
+            }
+        })
+    }
+    function csrfTest1() {
+        //pageCookie.csrf();
+        $.ajax({
+            type: 'post',
+            url: '/index/csrftest',
+            data: 't=t',
+            success: function(msg) {
+
+            }
+        })
+    }
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    setTimeout(function(){csrfTest1();},1000);
+</script>
 </body>
 </html>

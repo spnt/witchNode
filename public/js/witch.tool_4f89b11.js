@@ -1,0 +1,1 @@
+var tools={};tools.fitImg=function(){};

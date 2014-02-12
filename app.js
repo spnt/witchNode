@@ -13,19 +13,19 @@ var config=require('./config/config');//加载配置文件
 var app = express();
 
 // 开发环境
-app.configure('development', function() {
+if('development' == app.get('env')) {
     app.use(express.logger('dev'));
     app.use(express.errorHandler());
-});
+};
 
 // 生产环境
-app.configure('production', function() {
+if('production' == app.get('env')) {
     app.use(express.compress());
     app.use(function(req, resp, next) {
         resp.removeHeader('X-Powered-By');
         next();
     });
-});
+};
 
 // all environments
 app.set('port', config.listenPort);

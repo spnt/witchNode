@@ -97,5 +97,13 @@ home.insert=function(req,res){
     })
 }
 
+home.csrftest = function(req, res) {
+	if(!tools.checkCSRF(req,'POST')){//此方法检测了是否是csrf攻击
+		res.send('没有reffer或者csrf参数不正确');
+		return;
+	}
+	res.send('true');
+}
+
 
 module.exports = home; 
