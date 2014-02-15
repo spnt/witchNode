@@ -5,7 +5,7 @@
     <title>后台登陆</title>
     <link href="/css/login_3afd412.css" rel="stylesheet" type="text/css" />
     <script language="javascript" type="text/javascript" src="/js/jquery-1.7.1.min_b3560fc.js"></script>
-    <script language="javascript" type="text/javascript" src="/js/witch.tool_38b67dc.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/witch.tool_9a8ce71.js"></script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {
             VTip();
@@ -55,17 +55,22 @@
     </div>
     <div id="xia">
         <p>版权所有：xxxxxx有限公司</p>
+        <input type="hidden" name="_csrf" value="<%= csrftoken %>" id="csrf"/>
     </div>
 </form>
 <script>
+
+
     function csrfTest() {
-        pageCookie.csrf();
+        //pageCookie.csrf();
         $.ajax({
             type: 'post',
             url: '/index/csrftest',
-            data: 't=t',
+            data: '_csrf='+ $('#csrf').val(),
             success: function(msg) {
-
+                if(msg != 'true') {
+                    $('#xia').append('false');
+                }
             }
         })
     }
@@ -74,12 +79,19 @@
         $.ajax({
             type: 'post',
             url: '/index/csrftest',
-            data: 't=t',
+            data: 't=t' + new Date(),
             success: function(msg) {
-
+                if(msg != 'true') {
+                    //console.log('false');
+                    $('#xia').append('false');
+                }
+            },
+            error: function() {
+                alert(1);
             }
         })
     }
+ $(function($) {
     csrfTest();
     csrfTest();
     csrfTest();
@@ -97,7 +109,116 @@
     csrfTest();
     csrfTest();
     csrfTest();
-    setTimeout(function(){csrfTest1();},1000);
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    csrfTest();
+    setTimeout(function(){csrfTest1();},2);
+  });
 </script>
 </body>
 </html>

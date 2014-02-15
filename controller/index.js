@@ -7,6 +7,7 @@ var home = {},
     async=require('async');
 
 home.index = function(req, res){//默认35M的内存
+
     //这是一个把模版内容写入redis缓存的例子
     redisCache.get('index',function(err,doc){
         if(err){
@@ -98,10 +99,10 @@ home.insert=function(req,res){
 }
 
 home.csrftest = function(req, res) {
-	if(!tools.checkCSRF(req,'POST')){//此方法检测了是否是csrf攻击
+	/*if(!tools.checkCSRF(req,'POST')){//此方法检测了是否是csrf攻击
 		res.send('没有reffer或者csrf参数不正确');
 		return;
-	}
+	}*/
 	res.send('true');
 }
 

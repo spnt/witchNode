@@ -1,9 +1,5 @@
 
 module.exports = {
-//自定义配置
-//通用配置
-    //运行环境配置
-
    //web属性配置
     listenPort:3000,//监听端口
     uploadFolder:'/tmp/upload', //文件上传的临时目录
@@ -16,12 +12,9 @@ module.exports = {
     lockUserTime:1800,//锁定时间，单位秒
     webDomain:'192.168.1.202:3000',//网站主域名，用于判断Referer
 //session配置
-    isSession:false, //是否开启session，开启会影响性能。
-    syncSession:true,//当多进程时是否开启session同步，开启会影响性能。
-    sessionName:'rrSid', //保存session id 的cookie 的name
-    sessionExpire:false, //false表示会话session，否则填入1000*60，表示session有效1分钟
-    clearSessionSetInteval:1000*60*60, //自动清理垃圾session时间，建设设置为1小时
-    clearSessionTime:1000*60*60*24*7,//会话session超时，建议设置为1天
+    sessionExpire:43200000, //session过期时间，12小时，ms
+    clearSessionSetInteval:120000, //自动清理垃圾session时间，2小时
+	  sessiconSecret: 'H0UK*Lwd', //session加密密匙
 //logger log4js 配置
     isLog:false, //是否开启日志，过多的记录日志会影响性能，但是能记录系统运行情况
     logLevel:'info',//['trace','debug','info','warn','error', 'fatal'] 日志等级

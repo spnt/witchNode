@@ -7,7 +7,8 @@ var express = require('express');
 var routes = require('./routes');//加载路由
 var http = require('http');
 var path = require('path');
-var config=require('./config/config');//加载配置文件
+var config = require('./config/config');//加载配置文件
+var sessionMongoose = require("session-mongoose")(express);
 
 
 var app = express();
@@ -27,15 +28,36 @@ if('production' == app.get('env')) {
     });
 };
 
+
 // all environments
+var sessionStore = new sessionMongoose({
+	url: config.MongodbConnectString,
+	interval: config.clearSessionSetInteval
+
+});
+
 app.set('port', config.listenPort);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', require('ejs').__express);//修改ejs模板扩展名为html
 app.set('view engine', 'html');
-
 app.use(express.favicon());
 app.use(express.json());
+app.use(express.bodyParser());
 app.use(express.cookieParser());//使用cookie
+app.use(express.session({
+	secret: config.sessiconSecret,
+	store: sessionStore,
+	cookie: {
+		maxAge: config.sessionExpire
+	}
+}));
+app.use(express.csrf());
+app.use(function(req,res,next) {
+	//res.cookie('XSRF-TOKEN', req.csrfToken());
+	res.locals.csrftoken = req.csrfToken();
+	next();
+});
+
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 

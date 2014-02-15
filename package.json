@@ -1,6 +1,6 @@
 {
   "name": "WitchNode",
-  "version": "0.2.2",
+  "version": "0.2.5",
   "private": true,
   "author":"左盐",
   "E-mail":"huabinglan@163.com",
@@ -10,13 +10,15 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.7",
+    "express": "*",
     "ejs": "*",
     "xss":"*",
-    "mongoose":"3.8.x",
+    "mongoose":"*",
     "log4js":"*",
     "redis":"*",
     "generic-pool":"*",
-    "async":"*"
+    "async":"*",
+		"session-mongoose": "*",
+		"connect": "*"
   }
 }
