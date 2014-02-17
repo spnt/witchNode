@@ -91,7 +91,8 @@ windows:set NODE_ENV=production
 
 
 ##项目配置文件
-········js
+
+````````js
 
     listenPort:3000,//监听端口
 
