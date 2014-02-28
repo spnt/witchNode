@@ -2,8 +2,7 @@
   "name": "WitchNode",
   "version": "0.2.6",
   "private": true,
-  "author":"左盐",
-  "E-mail":"huabinglan@163.com",
+  "author":"左盐/huabinglan@163.com",
   "description":"web site Tools",
   "OS":"*inux and Windows",
   "scripts": {

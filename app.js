@@ -42,7 +42,7 @@ app.engine('.html', require('ejs').__express);//修改ejs模板扩展名为html
 app.set('view engine', 'html');
 app.use(express.favicon());
 app.use(express.json());
-app.use(express.bodyParser());
+app.use(express.urlencoded());
 app.use(express.cookieParser());//使用cookie
 app.use(express.session({
 	secret: config.sessiconSecret,
@@ -53,12 +53,10 @@ app.use(express.session({
 }));
 app.use(express.csrf());
 app.use(function(req,res,next) {
-	//res.cookie('XSRF-TOKEN', req.csrfToken());
 	res.locals.csrftoken = req.csrfToken();
 	next();
 });
 
-app.use(express.urlencoded());
 app.use(express.methodOverride());
 
 app.use(express.static(__dirname+ '/public',{maxAge:config.staticMaxAge}));//设置静态文件夹和静态缓存

@@ -8,11 +8,12 @@
     <link href="/css/base_486206c.css" rel="stylesheet" type="text/css" />
     <link href="/css/manage_4ec9a04.css" rel="stylesheet" type="text/css" />
     <script language="javascript" type="text/javascript" src="/js/jquery-1.7.1.min_b3560fc.js"> </script>
-    <script language="javascript" type="text/javascript" src="/ext/lhgDialog-4.2.0/lhgdialog.min.js?skin=iblack"></script>
+    <script language="javascript" type="text/javascript" src="/plug/layer/layer.min.js"></script>
     <script language="javascript" type="text/javascript" src="/js/manage_df4e5a0.js"></script>
 </head>
 <body>
     <div id="header">
+        <input type="hidden" name="_csrf" value="<%= csrftoken %>" id="csrf"/>
         <img src="/img/logo_002331c.png" alt="taosent" style="margin:8px 0 0 5px;" />
         <div id="managetip" >
             <div id="manage_usertip" onmouseover="manageAdminUser.disUserEditMenu('manage_usertip_menu')" onmouseout="manageAdminUser.hideUserEditMenu('manage_usertip_menu')">
